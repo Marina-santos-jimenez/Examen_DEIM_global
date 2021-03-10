@@ -1,21 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class eggnemie : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] GameObject Columna;
-
-    //Variable que tiene la posición del objeto de referencia
-    [SerializeField] Transform InitPos;
-    private CubeMove CubeMove;
-    [SerializeField] GameObject Obstaculo;
     public int contador;
-    private float randomNumberX;
-    private float randomNumberZ;
-    private float randomNumberY;
-    Vector3 RandomPos;
+    public int nColumnas;
+    private float tiempo = 0;
+    private float segundos = 0;
+    [SerializeField] Collider other;
+
+    [SerializeField] GameObject Obstaculo;
+    [SerializeField] Text Tiempo;
+    [SerializeField] Text ContadorColumnas;
+
+    // Start is called before the first frame update
     void Start()
     {
         StartCoroutine("ObstaculoCoroutine");
@@ -24,19 +26,20 @@ public class eggnemie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        TextoUI();
+        //OnTriggerEnter(other);
     }
-    void GenerarObstaculo(float posZ = 0f)
+
+    void GenerarObstaculo()
     {
-        randomNumberX = Random.Range(-20f, 20f);
-        randomNumberZ = Random.Range(-20f, 20f);
-        randomNumberY = Random.Range(0f, 20f);
+        float randomX = Random.Range(-9.5f, 9.5f);
+        float randomZ = Random.Range(-9.5f, 9.5f);
 
-        RandomPos = new Vector3(randomNumberX, randomNumberY, randomNumberZ);
+        Vector3 RndmPos = new Vector3(randomX, 0, randomZ);
+        Instantiate(Obstaculo, RndmPos, Quaternion.identity);
 
-        Vector3 FinalPos = InitPos.position + RandomPos;
-        Instantiate(Columna, FinalPos, Quaternion.identity);
     }
+
     IEnumerator ObstaculoCoroutine()
     {
         for (contador = 1; contador <= 5; contador++)
@@ -54,7 +57,14 @@ public class eggnemie : MonoBehaviour
             GenerarObstaculo();
             yield return new WaitForSeconds(0.5f);
         }
+    }
+    void TextoUI()
+    {
+        nColumnas = contador;
 
-
+        tiempo += Time.deltaTime;
+        segundos = tiempo % 60;
+        ContadorColumnas.text = "Nº de Huevos: " + nColumnas;
+        Tiempo.text = "Tiempo jugado: " + segundos.ToString("f1") + " segs";
     }
 }
