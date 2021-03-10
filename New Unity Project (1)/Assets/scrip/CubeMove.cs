@@ -33,7 +33,8 @@ public class CubeMove : MonoBehaviour
 
         if (posZ < 20f && posZ > -20f || posZ < -20f && desplZ > 0 || posZ > 20f && desplZ < 0)
         {
-            transform.Translate(Vector3.forward * Time.deltaTime * speed * desplZ);
+            transform.Translate(Vector3.back * Time.deltaTime * speed * desplZ);
         }
+        
     }
 }
