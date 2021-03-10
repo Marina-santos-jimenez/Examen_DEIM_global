@@ -8,6 +8,7 @@ public class MoveEgg : MonoBehaviour
     private float obstacleSpeed;
     public GameObject Egg;
      CubeMove cubeMove;
+    private eggnemie Eggnemie;
     void Start()
     {
         Egg = GameObject.Find("Cube");
@@ -26,5 +27,15 @@ public class MoveEgg : MonoBehaviour
 
         obstacleSpeed = cubeMove.speed;
         transform.Translate(Vector3.down * Time.deltaTime * obstacleSpeed);
+    }
+    void OnTriggerEnter(Collider other)
+    {
+
+        if (other.gameObject.tag == "Suelo")
+        {
+            Destroy(this.gameObject);
+                   
+        }
+
     }
 }
