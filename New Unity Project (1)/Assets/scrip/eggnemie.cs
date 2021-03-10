@@ -16,7 +16,11 @@ public class eggnemie : MonoBehaviour
     [SerializeField] GameObject Obstaculo;
     [SerializeField] Text Tiempo;
     [SerializeField] Text ContadorColumnas;
-
+    private float randomNumberX;
+    private float randomNumberZ;
+    private float randomNumberY;
+    Vector3 RandomPos;
+    [SerializeField] Transform InitPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,13 +34,16 @@ public class eggnemie : MonoBehaviour
         //OnTriggerEnter(other);
     }
 
-    void GenerarObstaculo()
+    void GenerarObstaculo(float posZ = 0f)
     {
-        float randomX = Random.Range(-9.5f, 9.5f);
-        float randomZ = Random.Range(-9.5f, 9.5f);
+        randomNumberX = Random.Range(-20f, 20f);
+        randomNumberZ = Random.Range(-20f, 20f);
+        randomNumberY = Random.Range(0f, 20f);
 
-        Vector3 RndmPos = new Vector3(randomX, 0, randomZ);
-        Instantiate(Obstaculo, RndmPos, Quaternion.identity);
+        RandomPos = new Vector3(randomNumberX, randomNumberY, randomNumberZ);
+
+        Vector3 FinalPos = InitPos.position + RandomPos;
+        Instantiate(Obstaculo, FinalPos, Quaternion.identity);
 
     }
 
