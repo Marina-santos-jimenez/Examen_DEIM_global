@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2521112121101627089}
   m_Layer: 0
   m_Name: Egg_FBX
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,3 +91,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b784d0efdad49b24ab14180cb1af85a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Egg: {fileID: 1578007574712830723}
